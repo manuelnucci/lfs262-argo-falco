@@ -18,11 +18,6 @@ kubectl patch -n argo cm workflow-controller-configmap -p '{"data": {"containerR
 kubectl apply -f argo-workflow/deployment/project.yaml -n argocd
 kubectl apply -f argo-workflow/deployment/application.yaml -n argocd
 echo ""
-echo "-- Install Falco --"
-kubectl create namespace falco
-kubectl apply -f falco/deployment/project.yaml -n argocd
-kubectl apply -f falco/deployment/application.yaml -n argocd
-echo ""
 echo "-- Wait until Pods are up & running --"
 ARGOCD_SERVER=$(kubectl get pods -n argocd | grep argocd-server | cut -f1 -d" ")
 ARGOWORKFLOW_SERVER=$(kubectl get pods -n argo | grep argo-server | cut -f1 -d" ")
